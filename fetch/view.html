@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Movie</title>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="moviedetails">
+                <div class="tralala">
+                    <img id="cocopuppy" src="" alt="" >
+                </div>
+                <div class="details">
+                    <h1 id="movieId"></h1>
+                    <p id="cocodate"></p>
+                    <p id="synopsis"></p>
+                    <h2 id="cocogen"></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script>
+        const movieId = new URLSearchParams(window.location.search).get('id');
+        const url = new URL(window.location.href);
+        const movies = JSON.parse(localStorage.getItem("movies"))
+        const index = movies.map(movie => movie._id).indexOf(movieId);
+        const movie = movies[index]
+
+        const genres = JSON.parse(localStorage.getItem("genres"))
+        const indexg = genres.map(genre => genre._id).indexOf(movie.genre);
+        const genre = genres[indexg]
+
+
+        document.getElementById("movieId").innerText = movie.title
+        document.getElementById("synopsis").innerText = movie.description
+        document.getElementById("cocopuppy").src = movie.addposterurl
+        document.getElementById("cocodate").innerText = movie.release_date
+
+        document.getElementById("cocogen").innerText = genre.title
+        console.log(genre.title)
+
+
+    </script>
+</body>
+</html>
